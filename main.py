@@ -19,7 +19,7 @@ b = 100
 
 # render the text for later
 
-t = Train(1000, 60)
+t = Train(5000, 60)
 
 # The loop will carry on until the user exits the game (e.g. clicks the close button).
 run = True
@@ -29,9 +29,9 @@ while run:
 
     keys = pygame.key.get_pressed()  # checking pressed keys
     if keys[pygame.K_l]:
-        t.move_direction("leave")
+        t.action("leave")
     if keys[pygame.K_a]:
-        t.move_direction("arrive")
+        t.action("arrive")
     if t.x < -1200:
         t.x = 2000
     # --- Main event loop

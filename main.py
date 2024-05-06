@@ -13,6 +13,9 @@ SCREEN_WIDTH = 1920
 size = (SCREEN_WIDTH, SCREEN_HEIGHT)
 screen = pygame.display.set_mode(size)
 
+# more vars
+frame = 0
+
 r = 50
 g = 0
 b = 100
@@ -25,7 +28,14 @@ t = Train(5000, 60)
 run = True
 
 # -------- Main Program Loop -----------
+clock = pygame.time.Clock()
 while run:
+    clock.tick(60)
+
+    if frame % 15 == 0:
+        t.switch_image()
+        print("SWITCH IMAGE!")
+
 
     keys = pygame.key.get_pressed()  # checking pressed keys
     if keys[pygame.K_l]:
@@ -43,5 +53,6 @@ while run:
     screen.blit(t.image, t.rect)
     pygame.display.update()
 
+    frame += 1
 # Once we have exited the main program loop we can stop the game engine:
 pygame.quit()

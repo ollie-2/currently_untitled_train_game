@@ -22,7 +22,7 @@ b = 100
 
 # render the text for later
 
-t = Train(5000, 60)
+t = Train(2000, 60)
 
 # The loop will carry on until the user exits the game (e.g. clicks the close button).
 run = True
@@ -34,6 +34,7 @@ while run:
 
     if frame % 15 == 0:
         t.switch_image()
+        t.door_animation("open")
         print("SWITCH IMAGE!")
 
 

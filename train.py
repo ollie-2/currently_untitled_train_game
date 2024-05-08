@@ -39,6 +39,9 @@ class Train:
         if direction == "leave":
             if self.x >= -1400:
                 self.x -= 0.015 * (440 - self.x)
+                print("LEAVING!")
+            else:
+                return True
 
         self.rect = pygame.Rect(self.x, self.y, self.image_size[0], self.image_size[1])
 
@@ -54,11 +57,16 @@ class Train:
 
     def door_animation(self, door_direction):
         if door_direction == "open":
-            self.door_number += 1
-        if not self.move_animation:
-            image_number = 1
-        self.image = pygame.image.load(self.move_image_list[self.door_number])
+            if self.door_number < 13:
+                self.door_number += 1
+            else:
+                return True
+        if door_direction == "close":
+            if self.door_number > 0:
+                self.door_number -= 1
+            else:
+                return True
+        self.image = pygame.image.load(self.door_image_list[self.door_number])
 
         self.rescale_image(self.image)
         self.image_size = self.image.get_size()
-

@@ -32,19 +32,28 @@ clock = pygame.time.Clock()
 while run:
     clock.tick(60)
 
-    if frame % 15 == 0:
-        t.switch_image()
-        t.door_animation("open")
-        print("SWITCH IMAGE!")
-
-
     keys = pygame.key.get_pressed()  # checking pressed keys
     if keys[pygame.K_l]:
         t.action("leave")
+        if frame % 15 == 0:
+            print(t.switch_image())
+            print("SWITCH IMAGE!")
+
     if keys[pygame.K_a]:
         t.action("arrive")
-    if t.x < -1200:
-        t.x = 2000
+        if frame % 15 == 0:
+            t.switch_image()
+            print("SWITCH IMAGE!")
+
+    if keys[pygame.K_d]:
+        if frame % 5 == 0:
+            t.door_animation("open")
+            print("SWITCH IMAGE!")
+
+    if keys[pygame.K_f]:
+        if frame % 5 == 0:
+            t.door_animation("close")
+            print("SWITCH IMAGE!")
     # --- Main event loop
     for event in pygame.event.get():  # User did something
         if event.type == pygame.QUIT:  # If user clicked close

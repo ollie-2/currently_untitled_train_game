@@ -34,26 +34,25 @@ while run:
 
     keys = pygame.key.get_pressed()  # checking pressed keys
     if keys[pygame.K_l]:
-        t.action("leave")
-        if frame % 15 == 0:
-            print(t.switch_image())
-            print("SWITCH IMAGE!")
-
-    if keys[pygame.K_a]:
-        t.action("arrive")
+        if frame % 1 == 0:
+            t.action("leave")
         if frame % 15 == 0:
             t.switch_image()
-            print("SWITCH IMAGE!")
+
+    if keys[pygame.K_a]:
+        if frame % 1 == 0:
+            t.action("arrive")
+        if frame % 15 == 0:
+            t.switch_image()
 
     if keys[pygame.K_d]:
         if frame % 5 == 0:
             t.door_animation("open")
-            print("SWITCH IMAGE!")
 
     if keys[pygame.K_f]:
         if frame % 5 == 0:
             t.door_animation("close")
-            print("SWITCH IMAGE!")
+
     # --- Main event loop
     for event in pygame.event.get():  # User did something
         if event.type == pygame.QUIT:  # If user clicked close

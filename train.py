@@ -39,7 +39,6 @@ class Train:
         if direction == "leave":
             if self.x >= -1400:
                 self.x -= 0.015 * (440 - self.x)
-                print("LEAVING!")
             else:
                 return True
 

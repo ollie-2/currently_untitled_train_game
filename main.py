@@ -4,7 +4,7 @@ from train import Train
 # set up pygame modules
 pygame.init()
 pygame.font.init()
-my_font = pygame.font.SysFont('Arial', 15)
+title_font = pygame.font.SysFont('Arial', 45)
 pygame.display.set_caption("Coin Collector!")
 
 # set up variables for the display
@@ -15,6 +15,12 @@ screen = pygame.display.set_mode(size)
 
 # more vars
 frame = 0
+frames_from_start = 0
+train_start_frame = 0
+scene = 0
+title = "Tickets, Please"
+
+display_title = title_font.render(title, True, (255, 255, 255))
 
 r = 50
 g = 0
@@ -30,28 +36,37 @@ run = True
 # -------- Main Program Loop -----------
 clock = pygame.time.Clock()
 while run:
-    clock.tick(60)
-
     keys = pygame.key.get_pressed()  # checking pressed keys
-    if keys[pygame.K_l]:
-        if frame % 1 == 0:
-            t.action("leave")
-        if frame % 15 == 0:
-            t.switch_image()
+    clock.tick(60)
+    if frame % 1 == 0:
+        frames_from_start += 1
+    if scene == 0:
+        display_title = title_font.render(title, True, (255, 255, 255))
+        if keys[pygame.K_RETURN] or keys[pygame.K_SPACE]:
+            scene = 1
+    if scene == 1:
+        if train_start_frame == 0:
+            train_start_frame = frames_from_start
 
-    if keys[pygame.K_a]:
-        if frame % 1 == 0:
-            t.action("arrive")
-        if frame % 15 == 0:
-            t.switch_image()
+        if keys[pygame.K_l]:
+            if frame % 1 == 0:
+                t.action("leave")
+            if frame % 15 == 0:
+                t.switch_image()
 
-    if keys[pygame.K_d]:
-        if frame % 5 == 0:
-            t.door_animation("open")
+        if keys[pygame.K_a]:
+            if frame % 1 == 0:
+                t.action("arrive")
+            if frame % 15 == 0:
+                t.switch_image()
 
-    if keys[pygame.K_f]:
-        if frame % 5 == 0:
-            t.door_animation("close")
+        if keys[pygame.K_d]:
+            if frame % 5 == 0:
+                t.door_animation("open")
+
+        if keys[pygame.K_f]:
+            if frame % 5 == 0:
+                t.door_animation("close")
 
     # --- Main event loop
     for event in pygame.event.get():  # User did something
@@ -59,7 +74,10 @@ while run:
             run = False
 
     screen.fill((r, g, b))
-    screen.blit(t.image, t.rect)
+    if scene == 0:
+        screen.blit(display_title, (0, 0))
+    if scene == 1:
+        screen.blit(t.image, t.rect)
     pygame.display.update()
 
     frame += 1

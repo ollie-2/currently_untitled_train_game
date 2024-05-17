@@ -32,17 +32,21 @@ class Train:
         if direction == "arrive":
             if self.x >= 400:
                 self.x -= 0.015 * (self.x - 360)
+                self.rect = pygame.Rect(self.x, self.y, self.image_size[0], self.image_size[1])
             elif not self.in_station:
                 self.x = 400
                 self.in_station = True
+                self.rect = pygame.Rect(self.x, self.y, self.image_size[0], self.image_size[1])
 
+            return False
         if direction == "leave":
             if self.x >= -1400:
                 self.x -= 0.015 * (440 - self.x)
+                self.rect = pygame.Rect(self.x, self.y, self.image_size[0], self.image_size[1])
+                return False
             else:
                 return True
 
-        self.rect = pygame.Rect(self.x, self.y, self.image_size[0], self.image_size[1])
 
     def switch_image(self):
         image_number = 0

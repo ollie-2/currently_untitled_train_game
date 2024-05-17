@@ -38,7 +38,9 @@ frame = 0
 frames_from_start = 0
 train_start_frame = 0
 scene = 0
+show_ticket = False
 title = "Tickets, Please"
+stop_animation = False
 
 display_title = title_font.render(title, True, (255, 255, 255))
 
@@ -69,18 +71,22 @@ while run:
         if keys[pygame.K_RETURN] or keys[pygame.K_SPACE]:
             scene = 1
     if scene == 1:
+
+        print(stop_animation)
+
         if train_start_frame == 0:
             train_start_frame = frames_from_start
 
-        if keys[pygame.K_l]:
+        if not stop_animation:
+            print("hi!")
             if frame % 1 == 0:
-                t.action("leave")
+                stop_animation = t.action("leave")
             if frame % 15 == 0:
                 t.switch_image()
 
         if keys[pygame.K_a]:
             if frame % 1 == 0:
-                t.action("arrive")
+                stop_animation = t.action("arrive")
             if frame % 15 == 0:
                 t.switch_image()
 
@@ -101,7 +107,8 @@ while run:
     if scene == 0:
         screen.blit(display_title, (0, 0))
     if scene == 1:
-        screen.blit(ticket.image, ticket.rect)
+        if show_ticket:
+            screen.blit(ticket.image, ticket.rect)
         screen.blit(t.image, t.rect)
     pygame.display.update()
 

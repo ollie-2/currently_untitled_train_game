@@ -16,5 +16,3 @@ class Ticket:
         scale_size = (self.image_size[0] * 12, self.image_size[1] * 12)
         self.image = pygame.transform.scale(self.image, scale_size)
 
-
-

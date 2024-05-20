@@ -1,3 +1,4 @@
+
 import pygame
 from train import Train
 from ticket import Ticket
@@ -41,6 +42,9 @@ scene = 0
 show_ticket = False
 title = "Tickets, Please"
 stop_animation = False
+door_open = False
+depart = False
+door_closed = False
 
 display_title = title_font.render(title, True, (255, 255, 255))
 
@@ -70,33 +74,32 @@ while run:
         display_title = title_font.render(title, True, (255, 255, 255))
         if keys[pygame.K_RETURN] or keys[pygame.K_SPACE]:
             scene = 1
+
     if scene == 1:
-
-        print(stop_animation)
-
         if train_start_frame == 0:
             train_start_frame = frames_from_start
 
         if not stop_animation:
-            print("hi!")
-            if frame % 1 == 0:
-                stop_animation = t.action("leave")
-            if frame % 15 == 0:
-                t.switch_image()
-
-        if keys[pygame.K_a]:
             if frame % 1 == 0:
                 stop_animation = t.action("arrive")
             if frame % 15 == 0:
                 t.switch_image()
 
-        if keys[pygame.K_d]:
+        if stop_animation and not door_open:
             if frame % 5 == 0:
-                t.door_animation("open")
+                door_open = t.door_animation("open")
 
-        if keys[pygame.K_f]:
+        if keys[pygame.K_RETURN]:
+            depart = True
+
+        if depart:
             if frame % 5 == 0:
-                t.door_animation("close")
+                door_closed = t.door_animation("close")
+            if door_closed:
+                if frame % 1 == 0:
+                    t.action("leave")
+                if frame % 15 == 0:
+                    t.switch_image()
 
     # --- Main event loop
     for event in pygame.event.get():  # User did something

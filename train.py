@@ -37,6 +37,7 @@ class Train:
                 self.x = 400
                 self.in_station = True
                 self.rect = pygame.Rect(self.x, self.y, self.image_size[0], self.image_size[1])
+                return True
 
             return False
         if direction == "leave":
@@ -46,7 +47,6 @@ class Train:
                 return False
             else:
                 return True
-
 
     def switch_image(self):
         image_number = 0

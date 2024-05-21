@@ -3,12 +3,13 @@ import pygame
 from train import Train
 from ticket import Ticket
 import random
+import time
 
 
 # picks the secret word from word list and returns as UPPERCASE string
 def pick_stations():
     station_list = []
-    f = open("stations", "r")
+    f = open("stations.txt", "r")
     for w in f:
         station_list.append(w.rstrip())
     f.close()
@@ -20,6 +21,10 @@ def pick_stations():
 
     stations = (station_list[r1], station_list[r2])
     return stations
+
+def render_ticket(s1, s2):
+    ticket_text = ()
+
 
 
 # set up pygame modules
@@ -46,6 +51,7 @@ door_open = False
 depart = False
 door_closed = False
 
+
 display_title = title_font.render(title, True, (255, 255, 255))
 
 r = 50
@@ -54,14 +60,14 @@ b = 100
 
 # render the text for later
 
-# train stations
+# train stations.txt
 
 t = Train(2000, 60)
 ticket = Ticket(0, 0)
 # The loop will carry on until the user exits the game (e.g. clicks the close button).
 run = True
 
-print(pick_stations())
+station1, station2 = pick_stations()
 
 # -------- Main Program Loop -----------
 clock = pygame.time.Clock()
@@ -100,6 +106,9 @@ while run:
                     t.action("leave")
                 if frame % 15 == 0:
                     t.switch_image()
+
+        # TICKET LOGIC
+
 
     # --- Main event loop
     for event in pygame.event.get():  # User did something

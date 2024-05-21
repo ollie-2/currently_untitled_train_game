@@ -1,0 +1,155 @@
+Adenauerplatz
+Alexanderplatz
+Alt-Mariendorf
+Alt-Tegel
+Alt-Tempelhof
+Altstadt Spandau
+Amrumer Straße
+Augsburger Straße
+Bayerischer Platz
+Berlin Brandenburger Tor
+Berlin Hauptbahnhof
+Berlin Potsdamer Platz
+Berlin Südkreuz
+Bernauer Straße
+Biesdorf-Süd
+Birkenstraße
+Bismarckstraße
+Blaschkoallee
+Blissestraße
+Boddinstraße
+Borsigwerke
+Breitenbachplatz
+Britz-Süd
+Bülowstraße
+Bundestag
+Bundesplatz
+Cottbusser Platz
+Dahlem-Dorf
+Deutsche Oper
+Eberswalder Straße
+Eisenacher Straße
+Elsterwerdaer Platz
+Ernst-Reuter-Platz
+Fehrbelliner Platz
+Frankfurter Allee
+Frankfurter Tor
+Franz-Neumann-Platz
+Freie Universität (Thielplatz)
+Friedrichsfelde
+Friedrichstraße
+Friedrich-Wilhelm-Platz
+Gesundbrunnen
+Gleisdreieck
+Gneisenaustraße
+Görlitzer Bahnhof
+Grenzallee
+Güntzelstraße
+Halemweg
+Hallesches Tor
+Hansaplatz
+Haselhorst
+Heidelberger Platz
+Hermannplatz
+Hermannstraße
+Hermsdorf
+Holzhauser Straße
+Hönow
+Hohenzollernplatz
+Innsbrucker Platz
+Jakob-Kaiser-Platz
+Jannowitzbrücke
+Jungfernheide
+Kaiserdamm
+Karl-Bonhoeffer-Nervenklinik
+Karl-Marx-Straße
+Kaulsdorf-Nord
+Kleistpark
+Klosterstraße
+Konstanzer Straße
+Kottbusser Tor
+Krumme Lanke
+Kurfürstendamm
+Kurfürstenstraße
+Leinestraße
+Leopoldplatz
+Lichtenberg
+Lindauer Allee
+Lipschitzallee
+Lübars
+Magdalenenstraße
+Märkisches Museum
+Märkisches Viertel
+Mehringdamm
+Mendelssohn-Bartholdy-Park
+Mierendorffplatz
+Mohrenstraße
+Moritzplatz
+Nauener Platz
+Neukölln
+Nollendorfplatz
+Olympia-Stadion
+Onkel Toms Hütte
+Oranienburger Tor
+Osloer Straße
+Otisstraße
+Paracelsus-Bad
+Paradestraße
+Parchimer Allee
+Paulsternstraße
+Platz der Luftbrücke
+Podbielskiallee
+Potsdamer Platz
+Prinzenstraße
+Rathaus Neukölln
+Rathaus Reinickendorf
+Rathaus Schöneberg
+Rathaus Spandau
+Rathaus Steglitz
+Rehberge
+Residenzstraße
+Richard-Wagner-Platz
+Rigiplatz
+Rohrdamm
+Rosa-Luxemburg-Platz
+Rudow
+Ruhleben
+Rüdesheimer Platz
+Samariterstraße
+Schillingstraße
+Schlesisches Tor
+Schloßstraße
+Schönhauser Allee
+Schönleinstraße
+Seestraße
+Senefelderplatz
+Siemensdamm
+Sophie-Charlotte-Platz
+Spichernstraße
+Spittelmarkt
+Stadtmitte
+Strausberger Platz
+Südstern
+Tempelhof
+Theodor-Heuss-Platz
+Tierpark
+Turmstraße
+Uhlandstraße
+Ullsteinstraße
+Unter den Linden
+Vinetastraße
+Voltastraße
+Walther-Schreiber-Platz
+Warschauer Straße
+Weberwiese
+Wedding
+Weinmeisterstraße
+Westhafen
+Westphalweg
+Wilmersdorfer Straße
+Wittenau
+Wittenbergplatz
+Wuhletal
+Yorckstraße
+Zitadelle
+Zoologischer Garten

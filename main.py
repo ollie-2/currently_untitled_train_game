@@ -9,21 +9,26 @@ import time
 # picks the secret word from word list and returns as UPPERCASE string
 def pick_stations():
     station_list = []
+    stops = []
     f = open("stations.txt", "r")
     for w in f:
         station_list.append(w.rstrip())
     f.close()
 
-    r1 = random.randint(0, len(station_list) - 1)
-    r2 = random.randint(0, len(station_list) - 1)
-    if r1 == r2:
-        r2 = 0
+    r1 = random.randint(0, len(station_list) - 7)
+    r2 = r1 + 7
 
-    stations = (station_list[r1], station_list[r2])
-    return stations
+    for station in station_list:
+        if r1 < station_list.index(station) < r2:
+            stops.append(station)
 
-def render_ticket(s1, s2):
-    ticket_text = ()
+    return stops, r1, r2
+
+
+def render_ticket(stops, first, last):
+    if random.randint(1, 4) == 4:
+        random.randint(0, first_stop - 2)
+
 
 
 
@@ -58,6 +63,7 @@ r = 50
 g = 0
 b = 100
 
+
 # render the text for later
 
 # train stations.txt
@@ -67,7 +73,8 @@ ticket = Ticket(0, 0)
 # The loop will carry on until the user exits the game (e.g. clicks the close button).
 run = True
 
-station1, station2 = pick_stations()
+stops, first_stop, last_stop = pick_stations()
+print(stops)
 
 # -------- Main Program Loop -----------
 clock = pygame.time.Clock()
@@ -109,8 +116,7 @@ while run:
 
         # TICKET LOGIC
 
-
-    # --- Main event loop
+    # Main event loop
     for event in pygame.event.get():  # User did something
         if event.type == pygame.QUIT:  # If user clicked close
             run = False

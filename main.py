@@ -27,15 +27,24 @@ def pick_stations():
 
 def render_ticket(stops, first, last):
     if random.randint(1, 4) == 4:
-        random.randint(0, first_stop - 2)
+        if random.randint(0, 1) == 1:
+            first_stop = random.randint(0, first - 3)
+            last_stop = random.randint(first_stop + 2, first - 1)
+        else:
+            first_stop = random.randint(last + 1, 151)
+            last_stop = random.randint(first_stop + 2, 154)
+    else:
+        first_stop = random.randint(first, last - 3)
+        last_stop = random.randint(first_stop, last)
 
-
+    return first_stop, last_stop
 
 
 # set up pygame modules
 pygame.init()
 pygame.font.init()
 title_font = pygame.font.SysFont('Arial', 45)
+game_font = pygame.font.SysFont('Arial', 25)
 pygame.display.set_caption("Coin Collector!")
 
 # set up variables for the display
@@ -74,7 +83,11 @@ ticket = Ticket(0, 0)
 run = True
 
 stops, first_stop, last_stop = pick_stations()
-print(stops)
+
+stops_txt = str(stops)
+print(stops_txt)
+
+display_stops = game_font.render(stops_txt, True, (255, 255, 255))
 
 # -------- Main Program Loop -----------
 clock = pygame.time.Clock()
@@ -115,6 +128,7 @@ while run:
                     t.switch_image()
 
         # TICKET LOGIC
+
 
     # Main event loop
     for event in pygame.event.get():  # User did something

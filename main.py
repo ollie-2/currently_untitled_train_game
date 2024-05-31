@@ -22,22 +22,23 @@ def pick_stations():
         if r1 < station_list.index(station) < r2:
             stops.append(station)
 
-    return stops, r1, r2
+    return stops, r1, r2, station_list
 
 
-def render_ticket(stops, first, last):
+def ticket_stops(first, last):
     if random.randint(1, 4) == 4:
         if random.randint(0, 1) == 1:
-            first_stop = random.randint(0, first - 3)
-            last_stop = random.randint(first_stop + 2, first - 1)
+            t_first_stop = random.randint(0, first - 3)
+            t_last_stop = random.randint(t_first_stop + 2, first - 1)
         else:
-            first_stop = random.randint(last + 1, 151)
-            last_stop = random.randint(first_stop + 2, 154)
+            t_first_stop = random.randint(last + 1, 151)
+            t_last_stop = random.randint(t_first_stop + 2, 154)
     else:
-        first_stop = random.randint(first, last - 3)
-        last_stop = random.randint(first_stop, last)
-
-    return first_stop, last_stop
+        t_first_stop = random.randint(first, last - 3)
+        t_last_stop = random.randint(t_first_stop, last)
+    if t_last_stop - t_first_stop >= 6:
+        t_last_stop = t_first_stop + 8
+    return t_first_stop, t_last_stop
 
 
 # set up pygame modules
@@ -82,10 +83,15 @@ ticket = Ticket(0, 0)
 # The loop will carry on until the user exits the game (e.g. clicks the close button).
 run = True
 
-stops, first_stop, last_stop = pick_stations()
+stops, first_stop, last_stop, list_stations = pick_stations()
 
-stops_txt = str(stops)
+print(ticket_stops(first_stop, last_stop))
+
+stops_txt = ", ".join(stops)
 print(stops_txt)
+
+ticket_text = "From: " + list_stations[first_stop] + "\nTo:" + list_stations[last_stop]
+print(ticket_text)
 
 display_stops = game_font.render(stops_txt, True, (255, 255, 255))
 
@@ -139,6 +145,7 @@ while run:
     if scene == 0:
         screen.blit(display_title, (0, 0))
     if scene == 1:
+        screen.blit(display_stops, (0, 0))
         if show_ticket:
             screen.blit(ticket.image, ticket.rect)
         screen.blit(t.image, t.rect)

@@ -27,6 +27,7 @@ def pick_stations():
 
 def ticket_stops(first, last):
     if random.randint(1, 4) == 4:
+        invalid_ticket = True
         if random.randint(0, 1) == 1:
             t_first_stop = random.randint(0, first - 3)
             t_last_stop = random.randint(t_first_stop + 2, first - 1)
@@ -34,11 +35,12 @@ def ticket_stops(first, last):
             t_first_stop = random.randint(last + 1, 151)
             t_last_stop = random.randint(t_first_stop + 2, 154)
     else:
+        invalid_ticket = False
         t_first_stop = random.randint(first, last - 3)
         t_last_stop = random.randint(t_first_stop, last)
     if t_last_stop - t_first_stop >= 6:
         t_last_stop = t_first_stop + 8
-    return t_first_stop, t_last_stop
+    return t_first_stop, t_last_stop, invalid_ticket
 
 
 # set up pygame modules
@@ -79,18 +81,18 @@ b = 100
 # train stations.txt
 
 t = Train(2000, 60)
-ticket = Ticket(0, 0)
+ticket = Ticket(0, 0, 0)
 # The loop will carry on until the user exits the game (e.g. clicks the close button).
 run = True
 
 stops, first_stop, last_stop, list_stations = pick_stations()
 
-print(ticket_stops(first_stop, last_stop))
-
+ticket_from, ticket_to, invalid = ticket_stops(first_stop, last_stop)
+print(invalid)
 stops_txt = ", ".join(stops)
 print(stops_txt)
 
-ticket_text = "From: " + list_stations[first_stop] + "\nTo:" + list_stations[last_stop]
+ticket_text = "From: " + list_stations[ticket_from] + "\nTo:" + list_stations[ticket_to]
 print(ticket_text)
 
 display_stops = game_font.render(stops_txt, True, (255, 255, 255))

@@ -3,13 +3,13 @@ import pygame
 from train import Train
 from ticket import Ticket
 import random
-import time
+# import time
 
 
 # picks the secret word from word list and returns as UPPERCASE string
 def pick_stations():
     station_list = []
-    stops = []
+    d_stops = []
     f = open("stations.txt", "r")
     for w in f:
         station_list.append(w.rstrip())
@@ -20,9 +20,9 @@ def pick_stations():
 
     for station in station_list:
         if r1 < station_list.index(station) < r2:
-            stops.append(station)
+            d_stops.append(station)
 
-    return stops, r1, r2, station_list
+    return d_stops, r1, r2, station_list
 
 
 def ticket_stops(first, last):
@@ -30,7 +30,7 @@ def ticket_stops(first, last):
         invalid_ticket = True
         if random.randint(0, 1) == 1:
             t_first_stop = random.randint(0, first - 3)
-            t_last_stop = random.randint(t_first_stop + 2, first - 1)
+            t_last_stop = random.randint(t_first_stop + 2, last - 1)
         else:
             t_first_stop = random.randint(last + 1, 151)
             t_last_stop = random.randint(t_first_stop + 2, 154)
@@ -39,7 +39,7 @@ def ticket_stops(first, last):
         t_first_stop = random.randint(first, last - 3)
         t_last_stop = random.randint(t_first_stop, last)
     if t_last_stop - t_first_stop >= 6:
-        t_last_stop = t_first_stop + 8
+        t_last_stop = t_first_stop + 6
     return t_first_stop, t_last_stop, invalid_ticket
 
 
@@ -61,13 +61,16 @@ frame = 0
 frames_from_start = 0
 train_start_frame = 0
 scene = 0
+score = 0
 show_ticket = False
 title = "Tickets, Please"
 stop_animation = False
 door_open = False
 depart = False
 door_closed = False
-
+new_ticket = False
+no_ticket = True
+invalid = False
 
 display_title = title_font.render(title, True, (255, 255, 255))
 
@@ -87,13 +90,8 @@ run = True
 
 stops, first_stop, last_stop, list_stations = pick_stations()
 
-ticket_from, ticket_to, invalid = ticket_stops(first_stop, last_stop)
-print(invalid)
 stops_txt = ", ".join(stops)
 print(stops_txt)
-
-ticket_text = "From: " + list_stations[ticket_from] + "\nTo:" + list_stations[ticket_to]
-print(ticket_text)
 
 display_stops = game_font.render(stops_txt, True, (255, 255, 255))
 
@@ -110,6 +108,7 @@ while run:
             scene = 1
 
     if scene == 1:
+
         if train_start_frame == 0:
             train_start_frame = frames_from_start
 
@@ -136,6 +135,19 @@ while run:
                     t.switch_image()
 
         # TICKET LOGIC
+        if door_open and no_ticket:
+            new_ticket = True
+            no_ticket = False
+        if new_ticket:
+            ticket_from, ticket_to, invalid = ticket_stops(first_stop, last_stop)
+            print(invalid)
+            ticket_text = "From: " + list_stations[ticket_from] + "\nTo :" + list_stations[ticket_to]
+            print(ticket_text)
+            new_ticket = False
+        if keys[pygame.K_y]:
+            if not invalid:
+                score += 1
+
 
 
     # Main event loop

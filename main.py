@@ -1,4 +1,3 @@
-
 import pygame
 from train import Train
 from ticket import Ticket
@@ -72,6 +71,8 @@ new_ticket = False
 no_ticket = True
 invalid = False
 
+display_ticket1 = game_font.render("ERROR: display_ticket1 undef", True, (255, 255, 255))
+display_ticket2 = game_font.render("ERROR: display_ticket2 undef", True, (255, 255, 255))
 display_title = title_font.render(title, True, (255, 255, 255))
 
 r = 50
@@ -84,7 +85,7 @@ b = 100
 # train stations.txt
 
 t = Train(2000, 60)
-ticket = Ticket(0, 0, 0)
+ticket = Ticket(1500, 30)
 # The loop will carry on until the user exits the game (e.g. clicks the close button).
 run = True
 
@@ -141,14 +142,16 @@ while run:
         if new_ticket:
             ticket_from, ticket_to, invalid = ticket_stops(first_stop, last_stop)
             print(invalid)
-            ticket_text = "From: " + list_stations[ticket_from] + "\nTo :" + list_stations[ticket_to]
-            print(ticket_text)
+            ticket_text1 = "From: " + list_stations[ticket_from]
+            ticket_text2 = "To :" + list_stations[ticket_to]
+            display_ticket1 = game_font.render(ticket_text1, True, (255, 255, 255))
+            display_ticket2 = game_font.render(ticket_text2, True, (255, 255, 255))
+            print(ticket_text1, "\n" + ticket_text2)
             new_ticket = False
+            show_ticket = True
         if keys[pygame.K_y]:
             if not invalid:
                 score += 1
-
-
 
     # Main event loop
     for event in pygame.event.get():  # User did something
@@ -162,6 +165,8 @@ while run:
         screen.blit(display_stops, (0, 0))
         if show_ticket:
             screen.blit(ticket.image, ticket.rect)
+            screen.blit(display_ticket1, (1550, 80))
+            screen.blit(display_ticket2, (1550, 110))
         screen.blit(t.image, t.rect)
     pygame.display.update()
 

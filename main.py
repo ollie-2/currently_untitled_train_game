@@ -9,7 +9,9 @@ import random
 def pick_stations():
     station_list = []
     d_stops = []
-    f = open("stations.txt", "r")
+
+    
+    f = open("stations.txt", "r", encoding="utf-8")
     for w in f:
         station_list.append(w.rstrip())
     f.close()
@@ -45,8 +47,8 @@ def ticket_stops(first, last):
 # set up pygame modules
 pygame.init()
 pygame.font.init()
-title_font = pygame.font.SysFont('Arial', 45)
-game_font = pygame.font.SysFont('Arial', 25)
+title_font = pygame.font.SysFont('Tiny5 - Regular', 125)
+game_font = pygame.font.SysFont('Tiny5 - Regular', 25)
 pygame.display.set_caption("Coin Collector!")
 
 # set up variables for the display
@@ -143,7 +145,7 @@ while run:
             ticket_from, ticket_to, invalid = ticket_stops(first_stop, last_stop)
             print(invalid)
             ticket_text1 = "From: " + list_stations[ticket_from]
-            ticket_text2 = "To :" + list_stations[ticket_to]
+            ticket_text2 = "To: " + list_stations[ticket_to]
             display_ticket1 = game_font.render(ticket_text1, True, (255, 255, 255))
             display_ticket2 = game_font.render(ticket_text2, True, (255, 255, 255))
             print(ticket_text1, "\n" + ticket_text2)
@@ -151,7 +153,18 @@ while run:
             show_ticket = True
         if keys[pygame.K_y]:
             if not invalid:
+                ticket.switch_image(2)
                 score += 1
+            else:
+                ticket.switch_image(1)
+                score -= 1
+        elif keys[pygame.K_n]:
+            if invalid:
+                ticket.switch_image(2)
+                score += 1
+            else:
+                ticket.switch_image(1)
+                score -= 1
 
     # Main event loop
     for event in pygame.event.get():  # User did something

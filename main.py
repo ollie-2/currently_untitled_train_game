@@ -10,7 +10,6 @@ def pick_stations():
     station_list = []
     d_stops = []
 
-    
     f = open("stations.txt", "r", encoding="utf-8")
     for w in f:
         station_list.append(w.rstrip())
@@ -38,7 +37,7 @@ def ticket_stops(first, last):
     else:
         invalid_ticket = False
         t_first_stop = random.randint(first, last - 3)
-        t_last_stop = random.randint(t_first_stop, last)
+        t_last_stop = random.randint(t_first_stop + 1, last)
     if t_last_stop - t_first_stop >= 6:
         t_last_stop = t_first_stop + 6
     return t_first_stop, t_last_stop, invalid_ticket
@@ -76,18 +75,20 @@ invalid = False
 display_ticket1 = game_font.render("ERROR: display_ticket1 undef", True, (255, 255, 255))
 display_ticket2 = game_font.render("ERROR: display_ticket2 undef", True, (255, 255, 255))
 display_title = title_font.render(title, True, (255, 255, 255))
+display_score = game_font.render("Score: " + str(score), True, (255, 255, 255))
 
-r = 50
-g = 0
-b = 100
+# 255, 217, 251
+r = 255
+g = 220
+b = 250
 
 
 # render the text for later
 
 # train stations.txt
 
-t = Train(2000, 60)
-ticket = Ticket(1500, 30)
+t = Train(2000, 200)
+ticket = Ticket(1500, 80)
 # The loop will carry on until the user exits the game (e.g. clicks the close button).
 run = True
 
@@ -165,7 +166,7 @@ while run:
             else:
                 ticket.switch_image(1)
                 score -= 1
-
+        display_score = game_font.render("Score: " + str(score), True, (255, 255, 255))
     # Main event loop
     for event in pygame.event.get():  # User did something
         if event.type == pygame.QUIT:  # If user clicked close
@@ -175,11 +176,12 @@ while run:
     if scene == 0:
         screen.blit(display_title, (0, 0))
     if scene == 1:
-        screen.blit(display_stops, (0, 0))
+        screen.blit(display_stops, (450, 20))
         if show_ticket:
             screen.blit(ticket.image, ticket.rect)
-            screen.blit(display_ticket1, (1550, 80))
-            screen.blit(display_ticket2, (1550, 110))
+            screen.blit(display_ticket1, (1550, 120))
+            screen.blit(display_ticket2, (1550, 150))
+        screen.blit(display_score, (900, 1000))
         screen.blit(t.image, t.rect)
     pygame.display.update()
 

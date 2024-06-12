@@ -26,11 +26,10 @@ class Ticket:
         self.rescale_image(self.image)
         self.image_size = self.image.get_size()
 
-    def slide(self, left_only):
-        if left_only:
-            self.x = 2000
-            if self.x > 1500:
-                self.x -= 10
-            else:
-                self.x = 1500
-
+    # def slide(self, left_only):
+    #     if left_only:
+    #         self.x = 2000
+    #         if self.x > 1500:
+    #             self.x -= 10
+    #         else:
+    #             self.x = 1500

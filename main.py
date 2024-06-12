@@ -71,6 +71,8 @@ door_closed = False
 new_ticket = False
 no_ticket = True
 invalid = False
+wait_time = 0
+add_score = True
 
 display_ticket1 = game_font.render("ERROR: display_ticket1 undef", True, (255, 255, 255))
 display_ticket2 = game_font.render("ERROR: display_ticket2 undef", True, (255, 255, 255))
@@ -139,33 +141,60 @@ while run:
                     t.switch_image()
 
         # TICKET LOGIC
+        if new_ticket:
+            if wait_time + 15 <= frame:
+                show_ticket = False
         if door_open and no_ticket:
             new_ticket = True
             no_ticket = False
         if new_ticket:
-            ticket_from, ticket_to, invalid = ticket_stops(first_stop, last_stop)
-            print(invalid)
-            ticket_text1 = "From: " + list_stations[ticket_from]
-            ticket_text2 = "To: " + list_stations[ticket_to]
-            display_ticket1 = game_font.render(ticket_text1, True, (255, 255, 255))
-            display_ticket2 = game_font.render(ticket_text2, True, (255, 255, 255))
-            print(ticket_text1, "\n" + ticket_text2)
-            new_ticket = False
-            show_ticket = True
+            if wait_time + 30 <= frame:
+                add_score = True
+                ticket_from, ticket_to, invalid = ticket_stops(first_stop, last_stop)
+                print(invalid)
+                ticket_text1 = "From: " + list_stations[ticket_from]
+                ticket_text2 = "To: " + list_stations[ticket_to]
+                display_ticket1 = game_font.render(ticket_text1, True, (255, 255, 255))
+                display_ticket2 = game_font.render(ticket_text2, True, (255, 255, 255))
+                print(ticket_text1, "\n" + ticket_text2)
+                new_ticket = False
+                show_ticket = True
+                ticket.switch_image(0)
         if keys[pygame.K_y]:
             if not invalid:
                 ticket.switch_image(2)
-                score += 1
+                if add_score:
+                    score += 1
+                    add_score = False
+                wait_time = frame
+                no_ticket = True
+                new_Ticket = False
             else:
-                ticket.switch_image(1)
-                score -= 1
+                ticket.switch_image(2)
+                if add_score:
+                    score -= 1
+                    add_score = False
+                wait_time = frame
+                no_ticket = True
+                new_Ticket = False
         elif keys[pygame.K_n]:
             if invalid:
-                ticket.switch_image(2)
-                score += 1
+                ticket.switch_image(1)
+                if add_score:
+                    score += 1
+                    add_score = False
+                wait_time = frame
+                no_ticket = True
+                new_Ticket = False
             else:
                 ticket.switch_image(1)
-                score -= 1
+                if add_score:
+                    score -= 1
+                    add_score = False
+                wait_time = frame
+                no_ticket = True
+                new_Ticket = False
+
         display_score = game_font.render("Score: " + str(score), True, (255, 255, 255))
     # Main event loop
     for event in pygame.event.get():  # User did something
